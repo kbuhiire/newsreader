@@ -1,0 +1,69 @@
+<div class="settings">
+<!-- 	<div class="panel panel-default panel-noborder">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fui-gear"></i> Password</h3>
+        </div>
+        <div class="panel-body">
+        	<form role="form" submit="changePassword()">
+			  <div class="form-group">
+			    <label for="oldPassword">Old Password</label>
+			    <input type="password" class="form-control" id="oldPassword" model="oldPassword" placeholder="Enter old Password">
+			  </div>
+			  <div class="form-group">
+			    <label for="newPassword">Password</label>
+			    <input type="password" class="form-control" id="newPassword" model="newPassword" placeholder="Enter Password">
+			  </div>
+			  <div class="form-group">
+			    <label for="newPasswordVerification">Password Verification</label>
+			    <input type="password" class="form-control" id="newPasswordVerification" model="newPasswordVerification" placeholder="Verify Password">
+			  </div>
+			  <button type="submit pull-right" class="btn btn-small btn-default">Save</button>
+			</form>
+        </div>
+    </div> -->
+	<div class="panel panel-default panel-noborder">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fui-gear"></i> Preferences</h3>
+        </div>
+        <div class="panel-body">
+		  <label class="checkbox primary" for="checkbox5" ng-click="showReadItems()">
+            <span class="icons" ng-show="!userInfo.show_read"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span>
+            <span class="icons" ng-show="userInfo.show_read"><span class="first-icon fui-checkbox-checked"></span><span class="second-icon fui-checkbox-unchecked"></span></span>
+            <input type="checkbox" value="" id="checkbox5" data-toggle="checkbox">
+            Show Read Items
+          </label>
+          <!-- <label class="checkbox primary" for="checkbox6">
+            <span class="icons" ng-show="!userInfo.disable_sharing"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span>
+			<span class="icons" ng-show="userInfo.disable_sharing"><span class="first-icon fui-checkbox-checked"></span><span class="second-icon fui-checkbox-unchecked"></span></span>
+            <input type="checkbox" value="" id="checkbox6" data-toggle="checkbox" ng-click="disableSharing()">
+            Disable Sharing Services
+          </label> -->
+          <button type="button" class="btn btn-small btn-primary" ng-click="undoAllread()" ng-show="userInfo.read_from">Remove "Mark All as Read"</button>
+        </div>
+    </div>
+    <div class="panel panel-default panel-noborder">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fui-gear"></i> Connections</h3>
+        </div>
+        <div class="panel-body">
+        	<p ng-hide="userInfo.enabled.pocket">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="connectPocket()">Connect Pocket</button>
+			</p>
+			<p ng-show="userInfo.enabled.pocket">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="disconnectPocket()">Logout Pocket</button>
+			</p>
+			<p ng-hide="userInfo.enabled.evernote">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="connectEvernote()">Connect Evernote</button>
+			</p>
+			<p ng-show="userInfo.enabled.evernote">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="disconnectPocket()">Logout Evernote</button>
+			</p>
+			<p ng-hide="userInfo.enabled.readability">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="connectReadability()">Connect Readability</button>
+			</p>
+			<p ng-show="userInfo.enabled.readability">
+		  		<button type="button" class="btn btn-small btn-primary" ng-click="disconnectPocket()">Logout Readability</button>
+			</p>
+        </div>
+    </div>
+</div>

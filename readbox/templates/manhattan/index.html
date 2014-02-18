@@ -1,0 +1,185 @@
+{% extends "manhattan/base.html" %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+<div class="modal fade" id="myModal" style="width: 408px; margin-left: -255px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" style="text-align: center; margin-bottom: -4px;"><i class="icon-inbox"></i> Log In Readbox</h4>
+      </div>
+      <div class="modal-body">
+          <div id="modalTab">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="login">
+                        {% include "manhattan/login.html" %}
+                    </div>
+                </div>
+            </div>
+      </div>
+</div>
+<div id="wrapper">
+    <div class="header header-main clearfix">
+		<div class="inner">
+			<div class="logo-pages">
+				<div class="logo">
+                	<a class="navigateTo" href="#homepage" style="color: rgb(52, 152, 219) !important;">
+						<span style="font-weight: 200; font-size: 26px;"><img src="{% static "readbox-logo.png" %}" style="width: 36px; margin-top: -6px;"/> Readbox</span>
+                    </a>
+				</div>
+			</div>
+            <div class="mobileMenuToggle"><a href=""></a></div>
+            <ul class="navigation">
+                <li><a href="#features-1">Get Readbox</a></li>
+                <li><a class="navigateTo" href="#features-2">Features</a></li>
+                <li><a class="navigateTo" href="http://blog.readbox.co">Blog</a></li>
+                {% if user.is_authenticated %}
+                    <li><a data-toggle="modal" href="{% url "logout" %}">Log Out</a></li>
+                {% else %}
+                    <li><a data-toggle="modal" href="#myModal" id="loginButtonHeader">Log In with Email</a></li>
+                    <form action="{% url 'facebook_connect' %}?facebook_login=1" method="post" style="display: inline-block; line-height: 0;">
+                    <a href="javascript:void(0);" style="font-size: 20px;" onclick="F.connect(this.parentNode);">
+                        <button class="btn btn-mini btn-facebook" style="margin-top: -5px;"><i class="icon-facebook"></i> Login with Facebook</button>
+                    </a>
+                    <input type="hidden" value="//www.readbox.co/reader/" name="next" />
+                    <input type="hidden" value="//www.readbox.co/reader/" name="register_next" />
+                    <input type="hidden" value="//www.readbox.co/" name="error_next" />
+                    {% csrf_token %}
+                    </form>
+                {% endif %}
+            </ul>
+		</div>
+    </div>
+    <!--end header--> 
+      
+	<!--start homepage-->
+	<div id="homepage" class="homepage section" style="height: 800px;">
+    
+    	<!--background image-->
+        <div class="epicFullscreen">
+			<img class="epicImg" src="{% static "django/images/blank.gif" %}" alt=""/>
+    	</div>
+        
+        <!--start featured content-->
+        <div class="content clearfix" id="featured">
+            <div style="min-width: 600px; height: 460px; top: 50%; text-align: center; margin-left: auto; margin-right: auto; float: none;">
+                <div style="display: inline-block; float: left;">
+                <h1 class="focus-title" style="font-weight: 300;"><img src="{% static "readbox-logo.png" %}" style="width: 200px;"/></h1>
+                <h1 class="focus-title" style="font-weight: 300;"><span>Readbox</span></h1>
+                <span><a href="https://itunes.apple.com/us/app/readbox/id751377884?ls=1&mt=8">
+                    <img src="{% static "images/AppStore.png" %}" /></a> </span>
+                </div>
+                <div style="display: inline-block; float: right;">
+                    <p style="text-align: center; margin-top: 20px;">
+                      {% if user.is_authenticated %}
+                        <div style="margin-bottom: 10px;">
+                            <img src="{{ user.picture }}" style="width: 48px; height: 48px; border-radius: 32px;" />
+                            <h5 class="focus-title" style="display: inline-block; padding: 8px;">{{ user.facebook_name }}</h5>
+                        </div>
+                        <a href="/reader/"><button type="button" class="btn btn-info btn-large btn-embossed">Open Reader</button></a>
+                      {% else %}
+                        <div style="text-align: center">
+                        {% include "manhattan/registration.html" %}
+                        </div>
+                      {% endif %}
+                    </p>
+                </div>
+            </div>
+{#            <div style="width: 456px; height: 460px; margin-top: -200px; text-align: center; position: absolute;">#}
+{##}
+{#            </div>#}
+        </div>
+    </div>
+	<div id="features-1" class="page odd section scroll" style="background:#fff) repeat;">
+{#        <div class="content clearfix">#}
+{#			<div class="column_one_half">#}
+{#				<h1 class="focus-title"><span>Readbox for iOS</span></h1>#}
+{#                 <p class="info-focus">A reader made with love.</p>#}
+{#                <p>Our iOS application is not yet available for public, if you are interested in being a beta tester drop us an email.</p>#}
+{#			</div>#}
+{#			<div class="column_one_half last">#}
+{#            	<div class="thumb feature right">#}
+{#					<img src="{% static "django/images/gallery/iphone-feat-1.png" %}" alt=""/>#}
+{#                </div>#}
+{#			</div>#}
+{#        </div>#}
+        <div id="highlight" class="highlight fixed" style="background: url({% static "django/coffeeTime.jpg" %}) no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+         <div class="info-container">
+                <div class="info">
+                    <h1 style="font-weight: 100; font-size: 80px;">Articles tailored to your tastes</h1>
+                    <!-- <img style="margin-right:20px;" src="{% static "django/images/featured-in.png" %}" alt=""/> -->
+                    <!-- <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-1.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-2.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-6.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-4.png" %}" alt=""/></a>
+                    --><br/>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+	</div>
+	<div id="features-2" class="page even section">
+        <div class="content clearfix">
+			<div class="column_one_half" style="text-align: center;">
+{#            	<div class="thumb feature left">#}
+{#					<img src="{% static "images/PNG/@2x/storage@2x.png" %}" alt=""/>#}
+{#                </div>#}
+                <p><img src="{% static "images/PNG/@2x/storage@2x.png" %}" alt=""/></p>
+                <h1 class="focus-title"><span>Cloud based</span></h1>
+			</div>
+			<div class="column_one_half last">
+                <p class="" style="font-size: 24px; font-weight: 200;">
+                    <img src="{% static "images/PNG/news.png" %}" alt="" style="width: 56px; margin-right: 10px; margin-bottom: 10px;"/>Star your favorite Articles
+                    <br>
+                    <img src="{% static "images/PNG/Pocket.png" %}" alt="" style="width: 56px; margin-right: 10px; margin-bottom: 10px;"/>Organize your Feeds
+                    <br>
+                    <img src="{% static "images/PNG/Search.png" %}" alt="" style="width: 56px; margin-right: 10px; margin-bottom: 10px;"/>Use our powerful Search
+                    <br>
+                    <img src="{% static "images/PNG/lock.png" %}" alt="" style="width: 56px; margin-right: 10px; margin-bottom: 10px;"/>Stay Safe, we got HTTPS
+                    <br>
+                    <img src="{% static "images/PNG/save.png" %}" alt="" style="width: 56px; margin-right: 10px;"/>Save to Pocket, Evernote and Readability
+{#                    <br>#}
+{#                    <i class="icon-arrow-up"></i> Upvoting system#}
+{#                    <br>#}
+{#                    <i class="icon-tags"></i> Tag articles#}
+{#                    <br>#}
+{#                    <i class="icon-cogs"></i> Smart streams#}
+                </p>
+            </div>
+        </div>
+        <div id="highlight-2" class="highlight scroll" style="background: url({% static "django/readingHeat.jpg" %}) repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+            <div class="info-container">
+                <div class="info">
+                    <h1 style="font-weight: 100; font-size: 80px;">Enjoy your reading experience</h1>
+                    <!-- <img style="margin-right:20px;" src="{% static "django/images/featured-in.png" %}" alt=""/> -->
+                    <!-- <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-1.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-2.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-6.png" %}" alt=""/></a>
+                    <a href=""><img style="margin-right:20px;" src="{% static "django/images/logos/logo-4.png" %}" alt=""/></a>
+                    --><br/>
+                </div>
+            </div>
+            <div class="section-button">
+                <a class="navigateTo page-up" href="#features-2"></a>
+            </div>
+        </div>
+	</div>
+	<div id="signup" class="page even section" style="text-align: center;">
+        <div class="content clearfix centeralign">
+			<h1 class="focus-title newsletter-title"><span>Sign up and start reading</span></h1>
+         </div>
+        <div class="footer-readbox" style="font-weight: 700; font-size: 16px; overflow: hidden;">
+            <div style="width: 80%; margin: 0 auto;">
+            <span style="float: left;"> &copy; Readbox, 2013</span>
+            <span style="float:right; margin-left: 12px;"><a href="//twitter.com/readboxapp"><i class="icon-twitter" style="font-size: 20px"></i></a></span>
+            <span style="float:right; margin-left: 12px;"><a href="mailto:support@readbox.co">Contact</a></span>
+            <span style="float:right; margin-left: 12px;"><a href="http://blog.readbox.co">Blog</a></span>
+
+            </div>
+        </div>
+        <br>
+	</div>
+</div>
+{% endblock %}

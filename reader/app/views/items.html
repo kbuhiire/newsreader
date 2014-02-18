@@ -1,0 +1,59 @@
+<div class="panel panel-primary article" ng-show="thisFeed">
+    <div class="panel-heading" style="border-radius: 3px;">
+        <img class="favicon" src="{{feeds.favicon[thisFeed]}}"></img> {{feeds.title[thisFeed]}}
+        <div class="pull-right">
+            <button class="btn btn-mini btn-danger" ng-click="removeFeed(thisFeed)" style="margin-top: -5px;">Remove</button>
+        </div>
+    </div>
+</div>
+
+<div infinite-scroll='articles.nextPage()' infinite-scroll-distance='2' class="article">
+    <div class="panel panel-default" ng-repeat='article in articles.items' ng-hide="isStarred && !starred[article.id]">
+        <div class="panel-body">
+            <div>
+                <ul class="unstyled info-box grey-text" style="margin-left:10px;">
+                    <li>
+                        {{article.date_parsed | amDateFormat:'MMM D, YYYY'}} (<span am-time-ago="article.date_parsed"></span>)
+                    </li>
+                </div>
+                <div class="star">
+                        <a href="" style="font-size: 20px;">
+                        <i class="fa fa-star-o" style="color: #95A5A6; text-decoration: none;" ng-hide="starred[article.id]" ng-click="articles.star(article.id)"></i>
+                        </a>
+                        <a href="" style="font-size: 20px; text-decoration: none;">
+                        <i class="fa fa-star" style="color: #F39C12;" ng-show="starred[article.id]" ng-click="articles.unstar(article.id)"></i>
+                        </a>
+                </div>
+                <h4><a ng-href="{{article.url}}" target="_blank">{{article.title}}</a></h4>
+                <div class="undertitle grey-text">
+                    from
+                    <img class="favicon" ng-src="{{feeds.favicon[article.feed]}}"></img>
+                    <a ng-href="#/feed/{{article.feed}}">{{feeds.title[article.feed]}}</a>
+                    <ng ng-show="article.author && article.author.length > 0">&middot; by {{article.author}}</ng>
+                </div>
+                </a>
+                <div ng-show="article.media.length > 0">
+                    <img class="media" ng-src="{{article.media}}"></img>
+                </div>
+                <div ng-bind-html="article.content" style="font-size: 13.8px;
+line-height: 18.4167px; font-family: Arial" class="article-article"></div>
+            </div>
+            <div class="panel-footer">
+                <div style="margin-bottom: -6px">
+                <button class="btn btn-mini btn-inverse" ng-click="articles.shareFacebook(article.url)" style="margin-top: -8px;"><i class="fa fa-facebook-square" style="margin-right: 3px;"></i>Share</button>
+                <button class="btn btn-mini btn-info" ng-click="articles.shareTwitter(article.url)" style="margin-top: -8px;"><i class="fa fa-twitter-square" style="margin-right: 3px;"></i>Tweet</button>
+                <button class="btn btn-mini btn-danger" ng-click="articles.shareGoogle(article.url)" style="margin-top: -8px;"><i class="fa fa-google-plus-square" style="margin-right: 3px;"></i>+1</button>
+            </div>
+                <div class="pull-right" style="margin-top: -18px;">
+                    <button type="button" class="btn btn-mini btn-default btn-embossed" style="background-image: url('/static/django/pocket.png'); background-size: 26px 26px; background-position: 25px 0.5px; width: 24px; height: 24px;" ng-click="articles.share('pocket', article.id)" ng-show="userInfo.enabled.pocket"></button>
+                    <button type="button" class="btn btn-mini btn-default btn-embossed" style="background-image: url('/static/django/evernote.png'); background-size: 26px 26px; background-position: -1px -1px; width: 24px; height: 24px;" ng-click="articles.share('evernote', article.id)" ng-show="userInfo.enabled.evernote"></button>
+                    <button type="button" class="btn btn-mini btn-default btn-embossed" style="background-image: url('/static/django/readability.jpg'); background-size: 26px 26px; background-position: -2px -1px; width: 24px; height: 24px;" ng-click="articles.share('readability', article.id)" ng-show="userInfo.enabled.readability"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin: 0 auto; float: none; text-align: center; font-size: 40px; margin-bottom: 20px;"><i class="fa fa-spinner fa-spin fa-6x" ng-show="loader.spin"></i></div>
+
+<hr ng-show="loader.end" />

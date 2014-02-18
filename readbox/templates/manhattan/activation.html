@@ -1,0 +1,17 @@
+{% extends "manhattan/base.html" %}
+{% load bootstrap_toolkit %}
+{% block content %}
+    <div class="container" style="margin-top: 20px">
+        <div class="panel {{ panel_style }}">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Activation
+                </h3>
+            </div>
+            <div class="panel-body">
+                {{ activation_message }}
+            </div>
+        </div>
+    <p style="text-align: center"><a href="/"><button type="submit" class="btn btn-primary">Return to Home</button></a></p>
+    </div>
+{% endblock %}

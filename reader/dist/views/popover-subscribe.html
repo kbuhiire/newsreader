@@ -1,0 +1,13 @@
+<div ng-controller="CollapsedCtrl">
+    <hr>
+    <div style="top:20px">
+        <div ng-show="show" class="arrow_box">
+            <form name="subscriptionForm" ng-submit="manageTypeahead($item)">
+        	<div class="form-group input-append {{formSubscribedClass}}" ng-submit="manageTypeahead($item)">
+	        	<input type="text" value="" placeholder="Search or insert an url" class="form-control" style="height: 21px; width: auto" ng-model="selected" typeahead-on-select="selectMatch($item)" typeahead="(x.title | words:3) for x in typeaheadSearch($viewValue)">
+	        	<button type="submit" ng-disabled="buttonSubscribe" class="form-control btn btn-success" ng-bind-html="buttonSubscribeText"></button>
+        	</div>      
+            </form> 
+        </div> 
+    </div>
+</div>

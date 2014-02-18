@@ -1,0 +1,16 @@
+<form action="{% url 'facebook_connect' %}?facebook_login=1" method="post" style="text-align: center;">
+    <a href="javascript:void(0);" style="font-size: 20px;" onclick="F.connect(this.parentNode);">
+        <button class="btn btn-large btn-facebook btn-embossed" style="margin-top: -5px;"><i class="icon-facebook"></i> Login with Facebook</button>
+    </a>
+    <input type="hidden" value="//www.readbox.co/reader/" name="next" />
+    <input type="hidden" value="//www.readbox.co/reader/" name="register_next" />
+    <input type="hidden" value="//www.readbox.co/" name="error_next" />
+    {% csrf_token %}
+</form>
+<hr>
+{% load crispy_forms_tags %}
+<form method="post" id="loginForm" action="{% url "login" %}" style="text-align: center;">
+    <div id="loginMessage"></div>
+    {% csrf_token %}
+    {% crispy login_form %}
+</form>

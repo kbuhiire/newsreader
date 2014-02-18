@@ -1,0 +1,21 @@
+<div masonry="{ transitionDuration: '0s' }" infinite-scroll="articles.nextPage()" infinite-scroll-distance="2" style="text-align: center">
+    <div class="article">
+        <div ng-repeat="article in articles.items">
+            <div class="masonry-brick">
+                <div style="margin-bottom:-14px">
+                    <div class="brick-feed-title">
+                        <a class="btn btn-mini btn-primary add-feed" ng-click="addFeed(article.feed)" ng-hide="feeds.title[article.feed]" style="padding:4px"><i class="fui-plus-inverted"></i></a>
+                        <img class="favicon" ng-src="{{article.feed_favicon}}">
+                        <a ng-href="#/feed/{{article.feed}}" ng-bind="article.feed_title"></a>
+                    </div>
+                </div>
+                <h4><a ng-href="{{article.url}}" target="_blank">
+                {{article.title}}</a></h4>
+                
+                <div class="media-popular-box" ng-show="article.media.length > 0" style="background-image: url('{{article.media}}')">
+                </div>
+                <div ng-bind-html="article.excerpt|words:30"></div>
+            </div>
+        </div>
+    </div>
+</div>

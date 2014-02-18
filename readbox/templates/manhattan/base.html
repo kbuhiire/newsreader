@@ -1,0 +1,73 @@
+{% load bootstrap_toolkit %}
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="{%  static "favicon.ico" %}" />
+<link rel="stylesheet" type="text/css" href="{% static "django/css/style.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "django/css/epicfullscreen.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "django/css/udt_shortcodes.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "bootstrap/css/bootstrap.css" %}"/>
+<link rel="stylesheet" type="text/css" href="{% static "css/flat-ui.css" %}"/>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link href="{% static "django/css/button.css" %}" type="text/css" rel="stylesheet" media="all" />
+<title>Readbox - A Powerful News Reader</title>
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44383577-2', 'readbox.co');
+  ga('send', 'pageview');
+</script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+{% include 'django_facebook/_facebook_js.html' %}
+{#<script type="text/javascript" src="{% static "django/js/uservoice.js" %}"></script>#}
+<script type="text/javascript" src="{% static "django/js/csrf.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/readbox.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/jquery.mobile-touch-swipe-1.0.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/jquery.lazyload.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/jquery.epicfullscreen.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/waypoints.min.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/jquery.parallax-1.1.3.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/onepage.js" %}"></script>
+<script type="text/javascript" src="{% static "django/js/common.js" %}"></script>
+{% bootstrap_javascript_tag %}
+<script type="text/javascript">
+			var isMobile = false;
+			if( navigator.userAgent.match(/Android/i) ||
+				navigator.userAgent.match(/webOS/i) ||
+				navigator.userAgent.match(/iPhone/i) ||
+				navigator.userAgent.match(/iPad/i)||
+				navigator.userAgent.match(/iPod/i) ||
+				navigator.userAgent.match(/BlackBerry/i)){
+					isMobile = true;
+			}
+            if (navigator.userAgent.match(/iPod/i) ||
+                    navigator.userAgent.match(/iPhone/i)) {
+{#                window.location.replace('');#}
+            }
+			//epic fullscreen
+			$(window).load(function(){
+				 $('.epicFullscreen').epicFullscreen({
+					opacity:0.9,
+					background:'#fff',
+					pattern:true,
+					callback: function(){
+						$('#featured').animate({opacity:1},500);
+					}
+				 });
+			});
+</script>
+</head>
+<body>
+{% block content %} {% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<ul class="nav nav-list" style="text-overflow:ellipsis; white-space:nowrap;"  ng-controller="SidebarCtrl">
+	<p></p>
+    <div ng-repeat="(folder, values) in feeds.folders" ng-show="folder != 'Main Folder' && values != true">
+    	<li class="nav-header"><span class="fui-folder"></span> <a href="#/folder/{{folder}}">{{folder}}</a></li>
+	        <ul class="nav nav-list">
+	            <li ng-repeat="feed in values">
+	                <a ng-href="#/feed/{{feed.id}}"><img class="favicon" ng-src="{{feed.favicon}}" ng-show="feed.favicon" /> {{feed.title}}</a>
+	            </li>
+	        </ul>
+    	</li>
+    	<li class="divider" style="margin-bottom: 4px;"></li>
+	</div>
+	<li class="nav-header"><span class="fui-folder"></span> Main Folder {{counters.root}}</li>
+        <ul class="nav nav-list">
+            <li ng-repeat="feed in feeds.root">
+                <a ng-href="#/feed/{{feed.id}}"><img class="favicon" ng-src="{{feed.favicon}}" ng-show="feed.favicon" /> {{feed.title}}</a>
+            </li>
+        </ul>
+	</li>
+</ul>

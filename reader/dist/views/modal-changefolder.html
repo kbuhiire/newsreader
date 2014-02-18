@@ -1,0 +1,23 @@
+<!-- Modal -->
+<div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="ChangefolderCtrl" style="width:320px; margin-left: -188px">
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="exit()">&times;</button>
+                <h4 class="modal-title">Move Feed</h4>
+            </div>
+            <form ng-submit="save()">
+                <div class="modal-body" style="text-align: center">
+                    <select class="form-control input-sm" ng-model="folderChoice" ng-options="key for key in folders" ng-disabled="newFolder">
+                        <option value="">-- Choose Folder --</option>
+                    </select>
+                    <h5>OR</h5>
+                    <input type="text" class="form-control input-sm" ng-model="newFolder" placeholder="Create a new folder">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="save()" data-dismiss="modal">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

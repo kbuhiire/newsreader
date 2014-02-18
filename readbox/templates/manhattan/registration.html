@@ -1,0 +1,11 @@
+{% load crispy_forms_tags %}
+<form method="post" id="registrationForm" action="{% url "login" %}">
+    <div id="registrationMessage"></div>
+    {% csrf_token %}
+    <div id="registrationDone" style="text-align: center;">
+        {% crispy registration_form %}
+        <div style="padding: 5px;">
+            <span style="color: #000000;">or <a data-toggle="modal" href="#myModal" style="color: #3498db; font-size: 16px;"><b>Log In</b></a></span>
+        </div>
+    </div>
+</form>
